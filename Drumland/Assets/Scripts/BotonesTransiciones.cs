@@ -17,4 +17,9 @@ public class BotonesTransiciones : MonoBehaviour
     {
         SceneManager.LoadScene("Login");
     }
+
+    public void Loading()
+    {
+        SceneManager.LoadScene("Loading");
+    }
 }
