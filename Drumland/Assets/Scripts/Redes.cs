@@ -7,7 +7,7 @@ using System;
 using UnityEngine.SceneManagement;
 
 // Rodrigo Alfredo Mendoza España
-// Poder hacer push requests a códigos php para ingresarlos a la base de datos
+// Poder hacer post requests a códigos php para ingresarlos a la base de datos
 public class Redes : MonoBehaviour
 {
     // texto de salida
@@ -81,7 +81,7 @@ public class Redes : MonoBehaviour
 
         WWWForm forma = new WWWForm();
         forma.AddField("datosJSON", JsonUtility.ToJson(datos));
-        UnityWebRequest request = UnityWebRequest.Post("https://drumlandtest.azurewebsites.net/validarLogIn.php", forma);
+        UnityWebRequest request = UnityWebRequest.Post("https://drumlandtest.azurewebsites.net/validarLogInDrumLand.php", forma);
         yield return request.SendWebRequest(); //Envia los datos al servidor
         if (request.result == UnityWebRequest.Result.Success)
         {
@@ -172,7 +172,7 @@ public class Redes : MonoBehaviour
         print(JsonUtility.ToJson(tiempo));
         WWWForm forma = new WWWForm();
         forma.AddField("datosJSON", JsonUtility.ToJson(tiempo));
-        UnityWebRequest request = UnityWebRequest.Post("https://drumlandtest.azurewebsites.net/enviarSesionDB.php", forma);
+        UnityWebRequest request = UnityWebRequest.Post("https://drumlandtest.azurewebsites.net/sendSessionDBDrumLand.php", forma);
         yield return request.SendWebRequest(); //Envia los datos al servidor
     }
 }
