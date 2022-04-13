@@ -16,12 +16,30 @@ public class Redes : MonoBehaviour
     //Referencias a la entrada de texto
     public TMP_InputField textoUsuario;
     public TMP_InputField textoPassword;
+    public TMP_InputField textoFirstName;
+    public TMP_InputField textoLastName;
+    public TMP_InputField textoCountry;
+    public TMP_InputField textoBirthmonth;
+    public TMP_InputField textoBirthday;
+    public TMP_InputField textoBirthyear;
 
     //estructura para los datos del usuario
     public struct DatosUsuario
     {
         public string usuario;
         public string password;
+    }
+
+    public struct DatosUsuarioRegistro
+    {
+        public string username;
+        public string passwordUser;
+        public string nameUser;
+        public string lastNameUser;
+        public string country;
+        public int birthMonth;
+        public int birthDay;
+        public int birthYear;
     }
 
     //estructura con atributos estaticos para mantenerlos fuera de funciones
@@ -42,6 +60,7 @@ public class Redes : MonoBehaviour
 
     public DatosUsuario datos;
     public DatosTiempoNoStatic tiempo;
+    public DatosUsuarioRegistro datosRegistro;
 
     // Para implementar en el botón de Log in
     public void LogIn()
@@ -93,14 +112,19 @@ public class Redes : MonoBehaviour
     // Esto para que el usuario pueda hacer Log in
     private IEnumerator RegistrarseCode()
     {
-        string usuario = textoUsuario.text;
-        string password = textoPassword.text;
-        datos.usuario = usuario;
-        datos.password = password;
-        print(JsonUtility.ToJson(datos));
+        datosRegistro.username = textoUsuario.text;
+        datosRegistro.passwordUser = textoPassword.text;
+        datosRegistro.nameUser = textoFirstName.text;
+        datosRegistro.lastNameUser = textoLastName.text;
+        datosRegistro.country = textoCountry.text;
+        datosRegistro.birthMonth = int.Parse(textoBirthmonth.text);
+        datosRegistro.birthDay = int.Parse(textoBirthday.text);
+        datosRegistro.birthYear = int.Parse(textoBirthyear.text);
+
+        print(JsonUtility.ToJson(datosRegistro));
         WWWForm forma = new WWWForm();
-        forma.AddField("datosJSON", JsonUtility.ToJson(datos));
-        UnityWebRequest request = UnityWebRequest.Post("https://drumlandtest.azurewebsites.net/enviarDatosDB.php", forma);
+        forma.AddField("datosJSON", JsonUtility.ToJson(datosRegistro));
+        UnityWebRequest request = UnityWebRequest.Post("https://drumlandtest.azurewebsites.net/RegistrarseDB.php", forma);
         yield return request.SendWebRequest(); //Envia los datos al servidor
         if (request.result == UnityWebRequest.Result.Success)
         {
