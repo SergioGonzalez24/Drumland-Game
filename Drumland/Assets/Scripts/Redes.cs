@@ -81,7 +81,7 @@ public class Redes : MonoBehaviour
 
         WWWForm forma = new WWWForm();
         forma.AddField("datosJSON", JsonUtility.ToJson(datos));
-        UnityWebRequest request = UnityWebRequest.Post("https://drumlandtest.azurewebsites.net/validarLogInDrumLand.php", forma);
+        UnityWebRequest request = UnityWebRequest.Post("https://drumland.azurewebsites.net/validarLogInDrumLand.php", forma);
         yield return request.SendWebRequest(); //Envia los datos al servidor
         if (request.result == UnityWebRequest.Result.Success)
         {
@@ -124,7 +124,7 @@ public class Redes : MonoBehaviour
         print(JsonUtility.ToJson(datosRegistro));
         WWWForm forma = new WWWForm();
         forma.AddField("datosJSON", JsonUtility.ToJson(datosRegistro));
-        UnityWebRequest request = UnityWebRequest.Post("https://drumlandtest.azurewebsites.net/RegistrarseDB.php", forma);
+        UnityWebRequest request = UnityWebRequest.Post("https://drumland.azurewebsites.net/RegistrarseDB.php", forma);
         yield return request.SendWebRequest(); //Envia los datos al servidor
         if (request.result == UnityWebRequest.Result.Success)
         {
@@ -172,7 +172,7 @@ public class Redes : MonoBehaviour
         print(JsonUtility.ToJson(tiempo));
         WWWForm forma = new WWWForm();
         forma.AddField("datosJSON", JsonUtility.ToJson(tiempo));
-        UnityWebRequest request = UnityWebRequest.Post("https://drumlandtest.azurewebsites.net/sendSessionDBDrumLand.php", forma);
+        UnityWebRequest request = UnityWebRequest.Post("https://drumland.azurewebsites.net/sendSessionDBDrumLand.php", forma);
         yield return request.SendWebRequest(); //Envia los datos al servidor
     }
 }
