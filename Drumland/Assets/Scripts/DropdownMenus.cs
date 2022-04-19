@@ -49,6 +49,7 @@ public class DropdownMenus : MonoBehaviour
     void Start()
     {
         countryDropdown.options.Clear();
+        countryDropdown.options.Add(new TMP_Dropdown.OptionData() { text = "Country" });
         foreach (string country in countries)
         {
             countryDropdown.options.Add(new TMP_Dropdown.OptionData() { text = country });

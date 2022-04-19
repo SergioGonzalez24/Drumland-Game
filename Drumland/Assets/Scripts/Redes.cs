@@ -20,10 +20,8 @@ public class Redes : MonoBehaviour
     public TMP_InputField textoFirstName;
     public TMP_InputField textoLastName;
     public TMP_Dropdown textoCountry;
-    public TMP_InputField textoBirthmonth;
-    public TMP_InputField textoBirthday;
-    public TMP_InputField textoBirthyear;
     public Text textDate;
+    public TMP_Dropdown sexUser;
 
     //estructura para los datos del usuario
     public struct DatosUsuario
@@ -42,6 +40,7 @@ public class Redes : MonoBehaviour
         public int birthMonth;
         public int birthDay;
         public int birthYear;
+        public string sexUser;
     }
 
     //estructura con atributos estaticos para mantenerlos fuera de funciones
@@ -123,6 +122,7 @@ public class Redes : MonoBehaviour
         datosRegistro.birthMonth = int.Parse(birthDatesArray[0]);
         datosRegistro.birthDay = int.Parse(birthDatesArray[1]);
         datosRegistro.birthYear = int.Parse(birthDatesArray[2]);
+        datosRegistro.sexUser = sexUser.captionText.text;
 
         print(JsonUtility.ToJson(datosRegistro));
         WWWForm forma = new WWWForm();
