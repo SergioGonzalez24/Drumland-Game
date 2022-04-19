@@ -14,8 +14,8 @@ public class MuevePersonaje : MonoBehaviour
     private SpriteRenderer sprRenderer;
 
     //velocidad
-    public float velocidadX = 0;
-    public float velocidadY = 0;
+    public float velocidadX = 10;
+    public float velocidadY = 10;
 
 
     // Start is called before the first frame update
@@ -44,6 +44,6 @@ public class MuevePersonaje : MonoBehaviour
         //Direcci�n
         sprRenderer.flipX = rb.velocity.x < 0;
 
-        animator.SetBool("saltando", !PruebaPiso.estaEnPiso);
+        animator.SetBool("saltando", !PruebaPiso.saltando);
     }
 }
