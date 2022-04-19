@@ -14,7 +14,7 @@ public class MuevePersonaje : MonoBehaviour
     private SpriteRenderer sprRenderer;
 
     //velocidad
-    public float velocidadX = 0;
+    public float velocidadX = 10;
     public float velocidadY = 10;
 
 
@@ -30,8 +30,8 @@ public class MuevePersonaje : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        /*float movHorizontal = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(movHorizontal * velocidadX, rb.velocity.y);*/
+        float movHorizontal = Input.GetAxis("Horizontal");
+        rb.velocity = new Vector2(movHorizontal * velocidadX, rb.velocity.y);
 
         float movVertical = Input.GetAxis("Vertical");
         if (movVertical > 0)
@@ -44,6 +44,6 @@ public class MuevePersonaje : MonoBehaviour
         //Direcci�n
         sprRenderer.flipX = rb.velocity.x < 0;
 
-        animator.SetBool("saltando", !PruebaPiso.estaEnPiso);
+        animator.SetBool("saltando", !PruebaPiso.saltando);
     }
 }
