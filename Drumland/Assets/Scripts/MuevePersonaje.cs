@@ -15,7 +15,7 @@ public class MuevePersonaje : MonoBehaviour
 
     //velocidad
     public float velocidadX = 0;
-    public float velocidadY = 0;
+    public float velocidadY = 10;
 
 
     // Start is called before the first frame update
@@ -30,8 +30,8 @@ public class MuevePersonaje : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        float movHorizontal = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(movHorizontal * velocidadX, rb.velocity.y);
+        /*float movHorizontal = Input.GetAxis("Horizontal");
+        rb.velocity = new Vector2(movHorizontal * velocidadX, rb.velocity.y);*/
 
         float movVertical = Input.GetAxis("Vertical");
         if (movVertical > 0)

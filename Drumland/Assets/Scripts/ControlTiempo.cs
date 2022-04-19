@@ -5,12 +5,12 @@ using UnityEngine;
 public class ControlTiempo : MonoBehaviour
 {
     [SerializeField]
-    private string tag;
+    private string tiempo;
 
     [SerializeField]
-    private GameObject jugadorPrefab;
+    private GameObject playerPrefab;
 
-    private GameObject jugador;
+    private GameObject player;
 
     [SerializeField]
     private GameObject[] spawnPoints;
@@ -27,16 +27,35 @@ public class ControlTiempo : MonoBehaviour
     [SerializeField]
     private GameObject gameUI;
 
-    private GameObject Timer;
+    private Timer Timer;
     // Start is called before the first frame update
     void Start()
     {
-        
+        Timer = gameObject.GetComponent<Timer>();
+        menuCamera.SetActive(true);
+        menuUI.SetActive(true);
+        gameUI.SetActive(false);
     }
 
     // Update is called once per frame
-    void Update()
+    public void startGame()
     {
-        
+        Timer.startTimer();
+        menuCamera.SetActive(false);
+        menuUI.SetActive(false);
+        gameUI.SetActive(true);
+    }
+
+    public void endGame()
+    {
+        Timer.stopTimer();
+        menuCamera.SetActive(true);
+        menuUI.SetActive(true);
+        gameUI.SetActive(false);
+
+        Destroy(player);
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }

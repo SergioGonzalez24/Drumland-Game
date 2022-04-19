@@ -18,10 +18,13 @@ public class Timer : MonoBehaviour
 
     [SerializeField]
     private Text timerText;
+
+    private ControlTiempo controlTiempo;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        controlTiempo = gameObject.GetComponent<ControlTiempo> ();
     }
 
     public void startTimer()
@@ -32,7 +35,7 @@ public class Timer : MonoBehaviour
 
     public void stopTimer()
     {
-
+        CancelInvoke();
     }
 
     private void writeTimer(int minutes, int seconds)
@@ -54,6 +57,8 @@ public class Timer : MonoBehaviour
         {
             if (minutes == 0)
             {
+                controlTiempo.endGame();
+                return;
                 //termina el juego
             } else
             {
