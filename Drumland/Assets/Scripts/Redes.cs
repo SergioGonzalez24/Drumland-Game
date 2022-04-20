@@ -6,7 +6,6 @@ using UnityEngine.Networking; //redes
 using System;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
 // Rodrigo Alfredo Mendoza España
 // Poder hacer post requests a códigos php para ingresarlos a la base de datos
 public class Redes : MonoBehaviour
@@ -118,6 +117,7 @@ public class Redes : MonoBehaviour
         datosRegistro.nameUser = textoFirstName.text;
         datosRegistro.lastNameUser = textoLastName.text;
         datosRegistro.country = textoCountry.captionText.text;
+        // Separar la fecha en mes, dia y año
         string[] birthDatesArray = textDate.text.Split('/');
         datosRegistro.birthMonth = int.Parse(birthDatesArray[0]);
         datosRegistro.birthDay = int.Parse(birthDatesArray[1]);
@@ -127,20 +127,29 @@ public class Redes : MonoBehaviour
         print(JsonUtility.ToJson(datosRegistro));
         WWWForm forma = new WWWForm();
         forma.AddField("datosJSON", JsonUtility.ToJson(datosRegistro));
-        UnityWebRequest request = UnityWebRequest.Post("https://drumland.azurewebsites.net/RegistrarseDB.php", forma);
-        yield return request.SendWebRequest(); //Envia los datos al servidor
-        if (request.result == UnityWebRequest.Result.Success)
+        if(datosRegistro.username == "" || datosRegistro.passwordUser == "" || datosRegistro.nameUser == "" ||
+            datosRegistro.lastNameUser == "" || datosRegistro.country == "Country" || datosRegistro.sexUser == "Sex")
         {
-            string texto = request.downloadHandler.text;
-            if (texto == "error")
-                resultado.text = "Username already exists";
-            else
-                resultado.text = "Account has been successfully created, you can login now";
+            resultado.text = "Please fill all fields";
         }
         else
         {
-            resultado.text = "Error al descargar: " + request.responseCode.ToString();
+            UnityWebRequest request = UnityWebRequest.Post("https://drumland.azurewebsites.net/RegistrarseDB.php", forma);
+            yield return request.SendWebRequest(); //Envia los datos al servidor
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                string texto = request.downloadHandler.text;
+                if (texto == "error")
+                    resultado.text = "Username already exists";
+                else
+                    resultado.text = "Account has been successfully created, you can login now";
+            }
+            else
+            {
+                resultado.text = "Error al descargar: " + request.responseCode.ToString();
+            }
         }
+        
     }
 
     // Para mandar a la escena desde registro
