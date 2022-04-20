@@ -5,6 +5,7 @@ using TMPro; //Text mesh pro
 using UnityEngine.Networking; //redes
 using System;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 // Rodrigo Alfredo Mendoza España
 // Poder hacer post requests a códigos php para ingresarlos a la base de datos
@@ -18,10 +19,9 @@ public class Redes : MonoBehaviour
     public TMP_InputField textoPassword;
     public TMP_InputField textoFirstName;
     public TMP_InputField textoLastName;
-    public TMP_InputField textoCountry;
-    public TMP_InputField textoBirthmonth;
-    public TMP_InputField textoBirthday;
-    public TMP_InputField textoBirthyear;
+    public TMP_Dropdown textoCountry;
+    public Text textDate;
+    public TMP_Dropdown sexUser;
 
     //estructura para los datos del usuario
     public struct DatosUsuario
@@ -40,6 +40,7 @@ public class Redes : MonoBehaviour
         public int birthMonth;
         public int birthDay;
         public int birthYear;
+        public string sexUser;
     }
 
     //estructura con atributos estaticos para mantenerlos fuera de funciones
@@ -116,10 +117,12 @@ public class Redes : MonoBehaviour
         datosRegistro.passwordUser = textoPassword.text;
         datosRegistro.nameUser = textoFirstName.text;
         datosRegistro.lastNameUser = textoLastName.text;
-        datosRegistro.country = textoCountry.text;
-        datosRegistro.birthMonth = int.Parse(textoBirthmonth.text);
-        datosRegistro.birthDay = int.Parse(textoBirthday.text);
-        datosRegistro.birthYear = int.Parse(textoBirthyear.text);
+        datosRegistro.country = textoCountry.captionText.text;
+        string[] birthDatesArray = textDate.text.Split('/');
+        datosRegistro.birthMonth = int.Parse(birthDatesArray[0]);
+        datosRegistro.birthDay = int.Parse(birthDatesArray[1]);
+        datosRegistro.birthYear = int.Parse(birthDatesArray[2]);
+        datosRegistro.sexUser = sexUser.captionText.text;
 
         print(JsonUtility.ToJson(datosRegistro));
         WWWForm forma = new WWWForm();
